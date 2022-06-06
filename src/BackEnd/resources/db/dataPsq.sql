@@ -1,14 +1,3 @@
-CREATE TABLE car(
-                    id INT  PRIMARY KEY,
-                    name VARCHAR(50),
-                    price INTEGER,
-                    doors INTEGER,
-                    type VARCHAR(25),
-                    img VARCHAR(200),
-                    passengers INTEGER,
-                    bags INTEGER
-
-);
 
 INSERT INTO car(id,name, type, price, img, passengers, doors, bags )
 VALUES (1, 'Seat Ibiza', 'small', 350, 'https://upload.wikimedia.org/wikipedia/commons/d/da/Seat_Ibiza_6J_Facelift_front_20140401.jpg' ,

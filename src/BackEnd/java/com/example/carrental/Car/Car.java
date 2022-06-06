@@ -9,7 +9,6 @@ import java.math.BigInteger;
 
 @Data
 @Entity
-@Table
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

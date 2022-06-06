@@ -51,7 +51,7 @@ class FilterComp extends Component {
     };
     allFilterClickListener = (e, filterProp) => {
         console.log("FILTER clicked", e.target.dataset.name);
-        const name = e.target.Date.name;
+        const name = e.target.data.name;
         this.setState(prevState => ({
             passingTags: {
                 ...prevState.passingTags,

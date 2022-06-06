@@ -1,43 +1,49 @@
 import './App.css';
 
-
 import * as React from 'react';
 import {createTheme} from "@mui/material/styles";
 import Filter from "./Container/Filter";
 import Carhm from "./Carhm";
+import {useEffect, useState} from "@types/react";
+import {getAll} from "./api/CarApi";
+import module  from '@types/react';
+import data from "./Data";
 
-const themeLight = createTheme({
-    palette: {
-        background: {
-            default: "#e4f0e2"
-        }
-    }
-});
-
-const themeDark = createTheme({
-    palette: {
-        background: {
-            default: "#222222"
-        },
-        text: {
-            primary: "#ffffff"
-        }
-    }
-});
 
 function App() {
-    // const [light, setLight] = React.useState(true);
-    //
-    // const [item, setItem] = useState(Data);
-    //
-    // const menuItems = [...new Set(Data.map((Val) => Val.type))];
-    //
-    // const filterItem = (curcat) =>{
-    //     const newItem = Data.filter((newVal) =>{
-    //         return newVal.type === curcat;
-    //     });
-    //     setItem(newItem);
-    // };
+    const [cars, setCars] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
+    useEffect(() => {
+        loadQueue();
+    }, [])
+
+    const loadQueue = () => {
+        setIsLoading(true);
+        getAll()
+            .then(response => {
+                setCars(response.data)
+                console.log(response.data)
+            }).catch((e)=>{
+            console.log(e)
+        })
+            .finally(() => {
+                setIsLoading(false);
+            })
+    }
+
+        const [light, setLight] = React.useState(true);
+
+    const [item, setItem] = useState(cars);
+
+    const menuItems = [...new Set(data.map((Val) => Val.type))];
+
+    const filterItem = (curcat) =>{
+        const newItem = data.filter((newVal) =>{
+            return newVal.type === curcat;
+        });
+        setItem(newItem);
+    }
 
     return (
 
@@ -46,10 +52,15 @@ function App() {
 
             <header className="App-header">
                 <h1 className="col-12 text-center my-3 fw-bold">Car type</h1>
-                <Filter></Filter>
+                <Filter  filterItem={filterItem}
+                         setItem={setItem}
+                         menuItems={menuItems}
+                ></Filter>
+                <Carhm item ={item}></Carhm>
             </header>
         </div>
     );
+
 }
 
 

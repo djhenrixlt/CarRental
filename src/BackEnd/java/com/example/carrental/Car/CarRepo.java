@@ -9,4 +9,6 @@ import java.util.List;
 public interface CarRepo extends JpaRepository<Car,Long> {
 
     List<Car> findAll();
+
+    List<Car> findByTypeIsBeforeAndTypeAfter(String type1, String type2);
 }
